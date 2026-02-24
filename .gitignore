@@ -2,3 +2,5 @@
 .env.local
 .env.backup
 *.zip
+*.sql
+temp
