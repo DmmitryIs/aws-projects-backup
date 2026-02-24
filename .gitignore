@@ -3,4 +3,5 @@
 .env.backup
 *.zip
 *.sql
-temp
+/temp/
+/.idea/
