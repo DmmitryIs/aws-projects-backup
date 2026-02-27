@@ -87,7 +87,8 @@ if [ ! -f "$LOCAL_FS" ]; then
     -x "storage/framework/sessions/*" \
     -x "storage/framework/debugbar/*" \
     -x "storage/framework/views/*" \
-    -x "storage/logs/*"
+    -x "storage/logs/*" \
+	-x "storage/temp/*"
 
   if [ -n "$SSL_PATH" ]; then
     echo "Zip SSL certificates"
