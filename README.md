@@ -39,6 +39,7 @@ DB_LIST=database:127.0.0.1:user:pass
 `PROJECT_PATH` - backup target\
 `SSL_PATH` - ssl dir to add to backup (optional)\
 `DB_LIST` - possible to use multiple db (comma separated: database:127.0.0.1:user:pass,database1:127.0.0.1:user:pass etc.)
+`DB_IGNORE_TABLES` - table1,table2 (comma seprated)
 
 6. Set in crontab
 ```
