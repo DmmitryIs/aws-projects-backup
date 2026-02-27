@@ -35,10 +35,10 @@ DB_LIST=database:127.0.0.1:user:pass
 
 `BUCKET` - aws bucket name\
 `ALIAS` - any alias up to you\
-`DAYS_TO_KEEP` - days to keep old backups
+`DAYS_TO_KEEP` - days to keep old backups\
 `PROJECT_PATH` - backup target\
 `SSL_PATH` - ssl dir to add to backup (optional)\
-`DB_LIST` - possible to use multiple db (comma separated: database:127.0.0.1:user:pass,database1:127.0.0.1:user:pass etc.)
+`DB_LIST` - possible to use multiple db (comma separated: database:127.0.0.1:user:pass,database1:127.0.0.1:user:pass etc.)\
 `DB_IGNORE_TABLES` - table1,table2 (comma seprated)
 
 6. Set in crontab
