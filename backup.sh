@@ -128,7 +128,30 @@ if [ ! -f "$LOCAL_DB" ]; then
       IFS=':' read -r DB_NAME DB_HOST DB_USER DB_PASS <<< "$ENTRY"
 
       echo "Dumping $DB_NAME..."
-      mysqldump -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" 2>/dev/null > "${SCRIPT_DIR}/${DB_NAME}_${TIMESTAMP}.sql"
+
+      IGNORE_PARAMS=""
+
+      IFS=',' read -ra TABLES <<< "$DB_IGNORE_TABLES"
+      for TABLE in "${TABLES[@]}"; do
+        echo "ignore table $TABLE"
+        IGNORE_PARAMS+=" --ignore-table=${DB_NAME}.${TABLE}"
+      done
+
+      mysqldump \
+        -h "$DB_HOST" \
+        -u "$DB_USER" \
+        -p"$DB_PASS" \
+        --single-transaction \
+        --quick \
+        --skip-lock-tables \
+        --set-gtid-purged=OFF \
+        --routines \
+        --triggers \
+        --events \
+        --default-character-set=utf8mb4 \
+        $IGNORE_PARAMS \
+        "$DB_NAME" \
+        2>/dev/null > "${SCRIPT_DIR}/${DB_NAME}_${TIMESTAMP}.sql"
 
       if [ "${PIPESTATUS[0]}" -eq 0 ]; then
         echo "Successfully dumped $DB_NAME"
@@ -159,6 +182,3 @@ if aws s3 cp "$LOCAL_DB" "s3://$BUCKET/$DEST_DB_KEY"; then
 else
 	echo "Error: Failed to upload archive to S3."
 fi
-
-
-
